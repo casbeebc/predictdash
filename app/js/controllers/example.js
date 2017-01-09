@@ -1,11 +1,31 @@
-function ExampleCtrl() {
+import Papa from 'papaparse';
 
-  // ViewModel
+function ExampleCtrl($scope) {
+  'ngInject';
+  
   const vm = this;
-
-  vm.title = 'AngularJS, Gulp, and Browserify! Written with keyboards and love!';
-  vm.number = 1234;
-
+  
+  // for multiple files:
+  $scope.uploadFiles = function (files) {
+    var config = {
+      header: true,
+      skipEmptyLines: true
+    };
+    if (files && files.length) {
+      for (var i = 0; i < files.length; i++) {
+        console.log(Papa.parse(file, config));
+      }
+    }
+  }
+  /*
+  vm.onChange = function(event) {
+     var files = event.target.files; //FileList object
+     for (var i = 0; i < files.length; i++) {
+         var file = files[i];
+         Papa.parse(file, config);
+     }
+   };
+   */
 }
 
 export default {

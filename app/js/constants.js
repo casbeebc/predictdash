@@ -1,5 +1,5 @@
 const AppSettings = {
-  appTitle: 'Example Application',
+  appTitle: 'Predict Dash',
   apiUrl: '/api/v1'
 };
 

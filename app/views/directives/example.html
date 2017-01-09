@@ -1,4 +1,17 @@
 <div class="example-directive">
   <h1>Directive title: {{title}}</h1>
-  <p>This is an example of a directive, click me!</p>
+  <p>TEST12345~ This is an example of a directive, click me!</p>
+  <div class="text-center">
+  	Upload PredictIt history csv file
+  </div>
+  <!--
+  <div ngf-drop="uploadFiles($files)" class="drop-box"
+    ngf-drag-over-class="'dragover'" ngf-multiple="true" 
+    ngf-pattern="'*'">Drop Images or PDFs files here</div>
+  -->
+  <div ngf-drop="uploadFiles($files)" class="drop-box"
+    ngf-drag-over-class="'dragover'" ngf-multiple="true">Drop Images or PDFs files here</div>
+  <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+  <!--input type="file" ngf-change="uploadFiles($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event)" id="files" ng-model="myFiles" ngf-multiple="true"-->
+  <!-- onchange="angular.element(this).scope().onChange(event)" -->
 </div>
