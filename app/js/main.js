@@ -8,6 +8,7 @@ import 'angular-ui-router';
 import 'ng-file-upload';
 import './templates';
 import './filters';
+import './components';
 import './controllers';
 import './services';
 import './directives';
@@ -20,7 +21,8 @@ const requires = [
   'app.filters',
   'app.controllers',
   'app.services',
-  'app.directives'
+  'app.directives',
+  'app.components'
 ];
 
 // mount on window for testing

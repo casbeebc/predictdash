@@ -1,0 +1,35 @@
+{
+  "name": "predictdash",
+  "description": "Prediction Dashboard",
+  "main": "",
+  "authors": [
+    "Brett Casbeer <casbeebc@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "express",
+    "gulp",
+    "browserify",
+    "angular",
+    "sass",
+    "karma",
+    "jasmine",
+    "protractor",
+    "boilerplate",
+    "papaparse",
+    "techan",
+    "ng-file-upload"
+  ],
+  "homepage": "https://github.com/casbeebc/predictdash",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "papaparse": "^4.1.2"
+  }
+}
