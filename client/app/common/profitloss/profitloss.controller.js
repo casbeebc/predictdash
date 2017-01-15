@@ -1,16 +1,13 @@
-
 class ProfitLossController {
-  constructor($scope) {
+  constructor($scope, ProfitLossService) {
     "ngInject";
     this.name = 'profitloss';
-    
     $scope.colors = ['#45b7cd', '#ff6384', '#ff8e72'];
 
-    $scope.labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    $scope.data = [
-      [65, -59, 80, 81, -56, 55, -40],
-      [28, 48, -40, 19, 86, 27, 90]
-    ];
+    $scope.labels = [];
+    
+    $scope.data = [];
+    
     $scope.datasetOverride = [
       {
         label: "Bar chart",
@@ -25,6 +22,15 @@ class ProfitLossController {
         type: 'line'
       }
     ];
+    $scope.$watch(function() { return ProfitLossService.dataLength; }, () => {
+      $scope.labels = ProfitLossService.profitLossPerDay()["dates"];
+      
+      $scope.data = [
+        ProfitLossService.profitLossPerDay()["profits"],
+        ProfitLossService.profitRunningTotalPerDay() 
+      ];
+    });
+    
   }
 }
 

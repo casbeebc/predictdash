@@ -8,10 +8,9 @@ let fileSelectDirective = angular.module('fileselect', [] )
   'ngInject';
   return {
     restrict: 'E',
-    //require: 'ngModel',
     template,
     link:  (scope, el) => {
-      console.log(el);
+      
       el.bind('change', (e) => {
         var files = e.target.files;
         
@@ -25,7 +24,7 @@ let fileSelectDirective = angular.module('fileselect', [] )
         
         if (files && files.length) {
           for (var i = 0; i < files.length; i++) {
-            Papa.parse(files[i], config);
+            Papa.parse(files[i], config); // parse the CSV
           }
         }
       });
