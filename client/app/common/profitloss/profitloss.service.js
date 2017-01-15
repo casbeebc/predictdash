@@ -4,6 +4,7 @@ function ProfitLossService($rootScope) {
   'ngInject';
   this.name = "profitloss.service";
   var tradeHistoryModel = [];
+  var profitlossPerDay = {};
   
   const service = {};
   
@@ -25,6 +26,7 @@ function ProfitLossService($rootScope) {
   
   service.load = function(data) {
     tradeHistoryModel = data;
+    profitlossPerDay = {};
     for(var trade of tradeHistoryModel) {
       trade['CreditDebit'] = convertToNumber(trade['CreditDebit']);
       trade['Fees'] = convertToNumber(trade['Fees']);
@@ -48,8 +50,7 @@ function ProfitLossService($rootScope) {
     var runningTotal = [];
     var currentTotal = null;
     
-    var profits = service.profitLossPerDay()["profits"]
-    profits = profits.reverse();
+    var profits = profitlossPerDay["profits"] || service.profitLossPerDay()["profits"];
     
     for(var profit of profits) {
       if(currentTotal !== null) {
@@ -98,8 +99,8 @@ function ProfitLossService($rootScope) {
       profits.push(currentDayObj["profit"]);
       dates.push(currentDayObj["date"]);
     }
-    
-    return {"profits": profits, "dates": dates};
+    profitlossPerDay = {"profits": profits.reverse(), "dates": dates.reverse()};
+    return profitlossPerDay;
   };
   
   
