@@ -1,12 +1,19 @@
 import moment from 'moment';
+import pouchdb from 'pouchdb';
+import uuid from 'uuid/v1';
+import pouchdbfind from 'pouchdb-find';
 
 function ProfitLossService($rootScope) {
   'ngInject';
   this.name = "profitloss.service";
+  var serviceID = uuid();
   var tradeHistoryModel = [];
   var profitlossPerDay = {};
   
   const service = {};
+
+  pouchdb.plugin(pouchdbfind);
+  var db = new pouchdb('tradeHistory', {adapter : 'websql'});
   
   var convertToNumber = (stringNumber) => {
     var isNegative = false;
@@ -36,6 +43,22 @@ function ProfitLossService($rootScope) {
       // example "1/05/2017 1:24 PM"
       trade['DateExecuted'] = moment(trade['DateExecuted'], "M/DD/YYYY h:mm A");
     }
+    
+    // Auto update existing document if called more than once
+    db.get(serviceID).then(function(doc) {
+      return db.put({
+        _id: serviceID,
+        _rev: doc._rev,
+        "data": tradeHistoryModel
+      });
+    }).catch(function (err) {
+      // initial load
+      db.put({
+        _id: serviceID,
+        "data": tradeHistoryModel
+      });
+    });
+    
     service.dataLength = tradeHistoryModel.length;
     $rootScope.$apply();
     
